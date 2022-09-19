@@ -120,3 +120,5 @@ C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\refint\DemoApplication.WebAPI.dll
 C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.pdb
 C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.genruntimeconfig.cache
 C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\ref\DemoApplication.WebAPI.dll
+C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Mapster.dll
+C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Mapster.Core.dll

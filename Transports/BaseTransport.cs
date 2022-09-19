@@ -3,8 +3,7 @@
 namespace DemoApplication.WebAPI.Transports
 {
     public abstract class BaseTransport
-    {
-        [DbColumn("Id")]
+    {    
         public long? Id { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
