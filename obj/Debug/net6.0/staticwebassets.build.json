@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "9aBWlH6entQFLWI7HN0uWL0uuD/54RBuoCqFhzooUo8=",
+  "Source": "DemoApplication.WebAPI",
+  "BasePath": "_content/DemoApplication.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
