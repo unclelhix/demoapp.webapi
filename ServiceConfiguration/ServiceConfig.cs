@@ -1,4 +1,4 @@
-﻿using DemoApplication.WebAPI.CustomMapper;
+﻿using DemoApplication.WebAPI.CustomMapperService;
 using DemoApplication.WebAPI.DatabaseContext;
 using DemoApplication.WebAPI.DatabaseSeeder;
 using DemoApplication.WebAPI.Services;
@@ -30,7 +30,7 @@ namespace DemoApplication.WebAPI.ServiceConfiguration
 
             services.AddScoped<IEmployeeMappingService, EmployeeMapping>();
 
-            services.AddScoped<ICustomMapper, CustoMapper>();
+            services.AddScoped<ICustomMapper, CustomMapper>();
 
             return services;
         }

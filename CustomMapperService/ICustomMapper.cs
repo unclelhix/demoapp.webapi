@@ -1,4 +1,4 @@
-﻿namespace DemoApplication.WebAPI.CustomMapper
+﻿namespace DemoApplication.WebAPI.CustomMapperService
 {
     public interface ICustomMapper
     {

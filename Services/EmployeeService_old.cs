@@ -1,4 +1,4 @@
-﻿using DemoApplication.WebAPI.CustomMapper;
+﻿using DemoApplication.WebAPI.CustomMapperService;
 using DemoApplication.WebAPI.DatabaseContext;
 using DemoApplication.WebAPI.Models;
 using DemoApplication.WebAPI.Services.ObjectMapping;

@@ -31,8 +31,7 @@ namespace DemoApplication.WebAPI.Controllers
         public async Task<IActionResult> UpdateEmployee([FromBody] EmployeeTransport employee)
         {
             if (employee == null)            
-                return BadRequest("Employee is null.");
-            
+                return BadRequest("Employee is null.");            
 
             var result = await _employeeService.Update(employee);
 

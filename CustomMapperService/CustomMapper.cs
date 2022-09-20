@@ -1,8 +1,8 @@
 ﻿using DemoApplication.WebAPI.Shared.Attributes;
 
-namespace DemoApplication.WebAPI.CustomMapper
+namespace DemoApplication.WebAPI.CustomMapperService
 {
-    public class CustoMapper : ICustomMapper
+    public class CustomMapper : ICustomMapper
     {
         public TDestination Map<TSource, TDestination>(TSource source)
             where TSource : class, new()
