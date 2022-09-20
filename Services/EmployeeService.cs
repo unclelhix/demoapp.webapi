@@ -42,9 +42,9 @@ namespace DemoApplication.WebAPI.Services
                 .Include(x => x.EmployeeGovernmentNumbers)
                 .Where(e => e.Id == id).FirstOrDefaultAsync();
 
-            var result = _customMapper.Map<Employee, EmployeeTransport>(employee);
+            //var result = _customMapper.Map<Employee, EmployeeTransport>(employee);
 
-            //var result = _employeeMappingService.MapToEmployeeTransport(employee);
+            var result = _employeeMappingService.MapToEmployeeTransport(employee);
 
             return result;
         }

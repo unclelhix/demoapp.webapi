@@ -2,6 +2,7 @@ using DemoApplication.WebAPI.CustomMapper;
 using DemoApplication.WebAPI.DatabaseContext;
 using DemoApplication.WebAPI.DatabaseSeeder;
 using DemoApplication.WebAPI.Models;
+using DemoApplication.WebAPI.ServiceConfiguration;
 using DemoApplication.WebAPI.Services;
 using DemoApplication.WebAPI.Services.ObjectMapping;
 using DemoApplication.WebAPI.Shared.Contracts;
@@ -12,21 +13,22 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<ApplicationDbContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+//builder.Services.AddDbContext<ApplicationDbContext>(options => {
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+//});
 
-builder.Services.AddScoped<IDateTimeService, DateTimeService>();
-builder.Services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+//builder.Services.AddScoped<IDateTimeService, DateTimeService>();
+//builder.Services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
-builder.Services.AddScoped<EmployeeSeeder>();
-builder.Services.AddScoped<DepartmentSeeder>();
+//builder.Services.AddScoped<EmployeeSeeder>();
+//builder.Services.AddScoped<DepartmentSeeder>();
 
-builder.Services.AddScoped<IEmployeeService,EmployeeService>();
-builder.Services.AddScoped<IEmployeeMappingService, EmployeeMapping>();
+//builder.Services.AddScoped<IEmployeeService,EmployeeService>();
+//builder.Services.AddScoped<IEmployeeMappingService, EmployeeMapping>();
 
-builder.Services.AddScoped<ICustomMapper, CustoMapper>();
+//builder.Services.AddScoped<ICustomMapper, CustoMapper>();
 
+builder.Services.AddServiceConfiguration(builder.Configuration);
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -58,6 +60,7 @@ void SeedDepartmentData(IHost app)
     }
 
 };
+
 void SeedEmployeeData(IHost app)
 {
     var scopeFactory = app.Services.GetService<IServiceScopeFactory>();
