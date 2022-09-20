@@ -1,9 +1,11 @@
-﻿using DemoApplication.WebAPI.Transports;
+﻿using DemoApplication.WebAPI.Shared.Contracts;
+using DemoApplication.WebAPI.Shared.Responses;
+using DemoApplication.WebAPI.Transports;
 
 namespace DemoApplication.WebAPI.Services
 {
-    public interface IDepartmentGroupService : IBaseDataRepository<DepartmentGroupTransport>
+    public interface IDepartmentGroupService : IBaseServiceDataRepository<DepartmentGroupTransport>
     {
-        Task<IEnumerable<DepartmentGroupTransport>> GetByDepartmentId(long departmentId);
+        Task<ServiceResponse<IEnumerable<DepartmentGroupTransport>>> GetByDepartmentId(long departmentId);
     }
 }

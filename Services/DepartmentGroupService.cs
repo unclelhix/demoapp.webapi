@@ -1,4 +1,5 @@
 ﻿using DemoApplication.WebAPI.DatabaseContext;
+using DemoApplication.WebAPI.Shared.Responses;
 using DemoApplication.WebAPI.Transports;
 using Mapster;
 using MapsterMapper;
@@ -10,37 +11,34 @@ namespace DemoApplication.WebAPI.Services
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        public DepartmentGroupService(IApplicationDbContext dbContext, IMapper mapper)
-        {
-            _dbContext = dbContext;
-            _mapper = mapper;
-        }
 
-        public async Task<bool> Add(DepartmentGroupTransport transportEntity)
+        public async Task<ServiceResponse<bool>> Add(DepartmentGroupTransport transportEntity)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<DepartmentGroupTransport>> GetAll()
+        public async Task<ServiceResponse<IEnumerable<DepartmentGroupTransport>>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DepartmentGroupTransport> GetById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<DepartmentGroupTransport>> GetByDepartmentId(long departmentId)
+        public async Task<ServiceResponse<IEnumerable<DepartmentGroupTransport>>> GetByDepartmentId(long departmentId)
         {
             var departmentGroup = await _dbContext.DepartmentGroup
                 .Where(x=>x.DepartmentId == departmentId)
                 .ProjectToType<DepartmentGroupTransport>().ToListAsync();
 
-            return departmentGroup;
+            return new ServiceResponse<IEnumerable<DepartmentGroupTransport>> {
+                Data = departmentGroup
+            };
         }
 
-        public async Task<bool> Update(DepartmentGroupTransport transportEntity)
+        public async Task<ServiceResponse<DepartmentGroupTransport>> GetById(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ServiceResponse<bool>> Update(DepartmentGroupTransport transportEntity)
         {
             throw new NotImplementedException();
         }

@@ -18,7 +18,7 @@ namespace DemoApplication.WebAPI.Controllers
         [HttpGet(template: "GetByDepartmentId/{id}", Name = nameof(GetByDepartmentId))]
         public async Task<IActionResult> GetByDepartmentId(long id)
         {
-            IEnumerable<DepartmentGroupTransport> departmentGroup = await _departmentGroupService.GetByDepartmentId(id);
+            var departmentGroup = await _departmentGroupService.GetByDepartmentId(id);
 
             if (departmentGroup == null)
                 return NotFound("The Employee record couldn't be found.");
