@@ -28,6 +28,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddScoped<ICustomMapper, CustoMapper>();
 
+builder.Services.AddMappingConfiguration();
 builder.Services.AddServiceConfiguration(builder.Configuration);
 
 builder.Services.AddControllers().AddJsonOptions(options =>

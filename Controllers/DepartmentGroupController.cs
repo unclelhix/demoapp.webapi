@@ -5,9 +5,9 @@ namespace DemoApplication.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentController : ControllerBase
+    public class DepartmentGroupController : ControllerBase
     {
-        public DepartmentController()
+        public DepartmentGroupController()
         {
 
         }
