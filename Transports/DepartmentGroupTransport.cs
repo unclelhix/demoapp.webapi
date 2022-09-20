@@ -9,10 +9,10 @@ namespace DemoApplication.WebAPI.Transports
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<DepartmentGroup, DepartmentGroupTransport>()
-              .IgnoreNullValues(true); ;
+              .IgnoreNullValues(true); 
 
             config.NewConfig<DepartmentGroupTransport, DepartmentGroup>()
-                .IgnoreNullValues(true); ;
+                .IgnoreNullValues(true); 
         }
     }
 }

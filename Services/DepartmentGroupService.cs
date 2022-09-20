@@ -12,7 +12,11 @@ namespace DemoApplication.WebAPI.Services
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-
+        public DepartmentGroupService(IApplicationDbContext dbContext, IMapper mapper)
+        {
+            _dbContext = dbContext;
+            _mapper = mapper;
+        }
         public async Task<ServiceResponse<bool>> Add(DepartmentGroupTransport transportEntity)
         {
             throw new NotImplementedException();
@@ -27,7 +31,8 @@ namespace DemoApplication.WebAPI.Services
         {
             var departmentGroup = await _dbContext.DepartmentGroup
                 .Where(x => x.DepartmentId == departmentId)
-                .ProjectToType<DepartmentGroupTransport>().ToListAsync();
+                .ProjectToType<DepartmentGroupTransport>()
+                .ToListAsync();
 
             return new ServiceResponse<IEnumerable<DepartmentGroupTransport>>
             {
