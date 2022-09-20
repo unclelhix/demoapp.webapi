@@ -1,8 +1,9 @@
-﻿using DemoApplication.WebAPI.Transports;
+﻿using DemoApplication.WebAPI.Shared.Contracts;
+using DemoApplication.WebAPI.Transports;
 
 namespace DemoApplication.WebAPI.Services
 {
-    public interface IDepartmentService : IBaseDataRepository<DepartmentTransport>
+    public interface IDepartmentService : IBaseServiceDataRepository<DepartmentTransport>
     {
     }
 }

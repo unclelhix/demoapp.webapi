@@ -21,7 +21,7 @@ namespace DemoApplication.WebAPI.Controllers
             if (transport == null)
                 return BadRequest("Employee is null.");
 
-            bool result = await _departmentService.Add(transport);
+            var result = await _departmentService.Add(transport);
 
             return Ok(result);
         }
@@ -33,7 +33,7 @@ namespace DemoApplication.WebAPI.Controllers
                 return BadRequest("Employee is null.");
 
 
-            bool result = await _departmentService.Update(transport);
+            var result  = await _departmentService.Update(transport);
 
             return Ok(result);
         }
@@ -41,7 +41,7 @@ namespace DemoApplication.WebAPI.Controllers
         [HttpGet(template: nameof(GetAllDepartment), Name = nameof(GetAllDepartment))]
         public async Task<IActionResult> GetAllDepartment()
         {
-            IEnumerable<DepartmentTransport> employees = await _departmentService.GetAll();
+            var employees = await _departmentService.GetAll();
 
             return Ok(employees);
         }
@@ -49,7 +49,7 @@ namespace DemoApplication.WebAPI.Controllers
         [HttpGet(template: "GetDepartmentById/{id}", Name = nameof(GetDepartmentById))]
         public async Task<IActionResult> GetDepartmentById(long id)
         {
-            DepartmentTransport employee = await _departmentService.GetById(id);
+            var employee = await _departmentService.GetById(id);
 
             if (employee == null)
                 return NotFound("The Employee record couldn't be found.");

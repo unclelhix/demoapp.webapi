@@ -1,5 +1,6 @@
 ﻿using DemoApplication.WebAPI.DatabaseContext;
 using DemoApplication.WebAPI.Models;
+using DemoApplication.WebAPI.Shared.Responses;
 using DemoApplication.WebAPI.Transports;
 using Mapster;
 using MapsterMapper;
@@ -17,39 +18,50 @@ namespace DemoApplication.WebAPI.Services
             _dbContext = dbContext; 
             _mapper = mapper;
         }
-        public async Task<bool> Add(DepartmentTransport transportEntity)
+        public async Task<ServiceResponse<bool>> Add(DepartmentTransport transportEntity)
         {
             var department = _mapper.Map<Department>(transportEntity);
 
             await _dbContext.Department.AddAsync(department);
 
-            return (await _dbContext.SaveChangesAsync() > 0 ? true : false);
+            return new ServiceResponse<bool>
+            {
+                Data = (await _dbContext.SaveChangesAsync() > 0 ? true : false)
+            };
 
         }
 
-        public async Task<IEnumerable<DepartmentTransport>> GetAll()
+        public async Task<ServiceResponse<IEnumerable<DepartmentTransport>>> GetAll()
         {
-            var departments = await _dbContext.Department.ProjectToType<DepartmentTransport>().ToListAsync();        
+            var departments = await _dbContext.Department.ProjectToType<DepartmentTransport>().ToListAsync();
 
-            return departments;
+            return new ServiceResponse<IEnumerable<DepartmentTransport>>
+            {
+                Data = departments
+            };
         }
 
-        public async Task<DepartmentTransport> GetById(long id)
+        public async Task<ServiceResponse<DepartmentTransport>> GetById(long id)
         {
             var department = await _dbContext.Department.Where(x => x.Id == id).FirstOrDefaultAsync();
 
             var result = _mapper.Map<DepartmentTransport>(department);
 
-            return result;
+            return new ServiceResponse<DepartmentTransport>
+            {
+                Data = result
+            };
         }
 
-        public async Task<bool> Update(DepartmentTransport transportEntity)
+        public async Task<ServiceResponse<bool>> Update(DepartmentTransport transportEntity)
         {
             var department = await _dbContext.Department.Where(x => x.Id == transportEntity.Id).FirstOrDefaultAsync();
 
             transportEntity.Adapt(department);
 
-            return (await _dbContext.SaveChangesAsync() > 0 ? true : false);
+            return new ServiceResponse<bool> {
+                Data = (await _dbContext.SaveChangesAsync() > 0 ? true : false)
+            };
         }
     }
 }
