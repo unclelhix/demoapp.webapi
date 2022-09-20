@@ -59,6 +59,13 @@ D:\Sample Programming\Dotnet\DemoApplication\DemoApplication.WebAPI\obj\Debug\ne
 D:\Sample Programming\Dotnet\DemoApplication\DemoApplication.WebAPI\obj\Debug\net6.0\DemoApplication.WebAPI.pdb
 D:\Sample Programming\Dotnet\DemoApplication\DemoApplication.WebAPI\obj\Debug\net6.0\DemoApplication.WebAPI.genruntimeconfig.cache
 D:\Sample Programming\Dotnet\DemoApplication\DemoApplication.WebAPI\obj\Debug\net6.0\ref\DemoApplication.WebAPI.dll
+C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.csproj.AssemblyReference.cache
+C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.AssemblyInfoInputs.cache
+C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.AssemblyInfo.cs
+C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.csproj.CoreCompileInputs.cache
+C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\appsettings.Development.json
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\appsettings.json
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\DemoApplication.WebAPI.exe
@@ -67,6 +74,8 @@ C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\DemoApplication.WebAPI.runtimeconfig.j
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\DemoApplication.WebAPI.dll
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\DemoApplication.WebAPI.pdb
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Humanizer.dll
+C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Mapster.dll
+C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Mapster.Core.dll
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -104,13 +113,6 @@ C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.csproj.AssemblyReference.cache
-C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.AssemblyInfoInputs.cache
-C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.AssemblyInfo.cs
-C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.csproj.CoreCompileInputs.cache
-C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\staticwebassets.build.json
 C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\staticwebassets.development.json
 C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\scopedcss\bundle\DemoApplication.WebAPI.styles.css
@@ -120,5 +122,3 @@ C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\refint\DemoApplication.WebAPI.dll
 C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.pdb
 C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\DemoApplication.WebAPI.genruntimeconfig.cache
 C:\Dotnet\demoapp.webapi\obj\Debug\net6.0\ref\DemoApplication.WebAPI.dll
-C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Mapster.dll
-C:\Dotnet\demoapp.webapi\bin\Debug\net6.0\Mapster.Core.dll

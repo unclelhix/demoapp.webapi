@@ -1,4 +1,5 @@
 ﻿using DemoApplication.WebAPI.Services;
+using DemoApplication.WebAPI.Shared.Responses;
 using DemoApplication.WebAPI.Transports;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,12 +39,20 @@ namespace DemoApplication.WebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet(template: nameof(GetAll), Name = nameof(GetAll))]
+        public async Task<IActionResult> GetAll([FromQuery] PagingRequest request)
+        {
+            var result = await _departmentService.GetAll(request);
+
+            return Ok(result);
+        }
+
         [HttpGet(template: nameof(GetAllDepartment), Name = nameof(GetAllDepartment))]
         public async Task<IActionResult> GetAllDepartment()
         {
-            var employees = await _departmentService.GetAll();
+            var result = await _departmentService.GetAllDepartment();
 
-            return Ok(employees);
+            return Ok(result);
         }
 
         [HttpGet(template: "GetDepartmentById/{id}", Name = nameof(GetDepartmentById))]

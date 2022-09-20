@@ -1,144 +1,79 @@
-﻿using DemoApplication.WebAPI.CustomMapper;
-using DemoApplication.WebAPI.DatabaseContext;
+﻿using DemoApplication.WebAPI.DatabaseContext;
 using DemoApplication.WebAPI.Models;
-using DemoApplication.WebAPI.Services.ObjectMapping;
+using DemoApplication.WebAPI.Shared.Responses;
 using DemoApplication.WebAPI.Transports;
+using Mapster;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoApplication.WebAPI.Services
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly IEmployeeMappingService _employeeMappingService;
-        private readonly ApplicationDbContext _applicationDbContext;
-        private readonly ICustomMapper _customMapper;
+        private readonly IApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public EmployeeService(
-            ApplicationDbContext applicationDbContext, 
-            ICustomMapper customMapper, 
-            IEmployeeMappingService employeeMappingService)
+        public EmployeeService(IApplicationDbContext dbContext, IMapper mapper)
         {
-            _applicationDbContext = applicationDbContext;
-            _employeeMappingService = employeeMappingService;
-            _customMapper = customMapper;
+            _dbContext = dbContext;
+            _mapper = mapper;
+        }
+        public async Task<ServiceResponse<bool>> Add(EmployeeTransport transportEntity)
+        {
+            var employee = _mapper.Map<Employee>(transportEntity);
+
+            await _dbContext.Employee.AddAsync(employee);
+
+            return new ServiceResponse<bool>
+            {
+                Data = (await _dbContext.SaveChangesAsync() > 0 ? true : false)
+            };
         }
 
-        public async Task<bool> Add(EmployeeTransport transportEntity)
+        public async Task<PagingResponse<EmployeeTransport>> GetAll(PagingRequest request)
         {
-            var employee = _employeeMappingService.MapToEmployee(transportEntity);
+            var query = _dbContext.Employee;
 
-            await _applicationDbContext.Employee.AddAsync(employee);
+            var items = await query.Skip(request.SkipItems).Take(request.ItemsPerPage).ToListAsync();
 
-            bool result = await _applicationDbContext.SaveChangesAsync() > 0 ? true: false;
+            var totalItems = await query.CountAsync();
 
-            return result;
+            var mappedItems = _mapper.Map<List<EmployeeTransport>>(items);
 
+            return new PagingResponse<EmployeeTransport>
+            {
+                Data = mappedItems,
+                TotalItems = totalItems,
+                CurrentPage = request.CurrentPage,
+                ItemsPerPage = request.ItemsPerPage
+
+            };
         }
 
-        public async Task<EmployeeTransport> GetById(long id)
+        public async Task<ServiceResponse<EmployeeTransport>> GetById(long id)
         {
-            var employee = await _applicationDbContext.Employee
-                .Include(x => x.EmployeeContacts)
-                .Include(x => x.EmployeeGovernmentNumbers)
-                .Where(e => e.Id == id).FirstOrDefaultAsync();
+            var employee = await _dbContext.Employee.Where(x => x.Id == id)
+                .ProjectToType<EmployeeTransport>()
+                .FirstOrDefaultAsync();
 
-            //var result = _customMapper.Map<Employee, EmployeeTransport>(employee);
+            //var result = _mapper.Map<DepartmentTransport>(department);
 
-            var result = _employeeMappingService.MapToEmployeeTransport(employee);
-
-            return result;
+            return new ServiceResponse<EmployeeTransport>
+            {
+                Data = employee
+            };
         }
 
-        public async Task<IEnumerable<EmployeeTransport>> GetAll()
+        public async Task<ServiceResponse<bool>> Update(EmployeeTransport transportEntity)
         {
-            var employee = await _applicationDbContext.Employee
-                .Include(x => x.EmployeeContacts)
-                .Include(x => x.EmployeeGovernmentNumbers)
-                .ToListAsync();
+            var employee = await _dbContext.Employee.Where(x => x.Id == transportEntity.Id).FirstOrDefaultAsync();
 
-            var result = _employeeMappingService.MapToEmployeeTransport(employee);
+            transportEntity.Adapt(employee);
 
-            return result;
+            return new ServiceResponse<bool>
+            {
+                Data = (await _dbContext.SaveChangesAsync() > 0 ? true : false)
+            };
         }
-
-        public async Task<bool> Update(EmployeeTransport transportEntity)
-        {
-            var employee = _applicationDbContext.Employee
-               .Include(x => x.EmployeeContacts)
-               .Include(x => x.EmployeeGovernmentNumbers)
-               .Where(e => e.Id == transportEntity.Id).FirstOrDefault();
-
-            employee.UpdatedOn = DateTime.Now;
-            employee.UpdatedBy = "User";
-
-            employee = _employeeMappingService.MapToEmployee(transportEntity, employee);
-
-
-            bool result = await _applicationDbContext.SaveChangesAsync() > 0 ? true : false;
-
-            return result;
-        }
-
-        public async Task<List<EmployeeTransport>> GetBySearchTerm(string searchTerm)
-        {
-            var employee = await _applicationDbContext.Employee
-                .Include(x => x.EmployeeContacts)
-                .Include(x => x.EmployeeGovernmentNumbers)
-                .Where(e =>
-                EF.Functions.Like(e.FirstName, searchTerm) ||
-                EF.Functions.Like(e.LastName, searchTerm) ||
-                EF.Functions.Like(e.EmployeeNumber, searchTerm))
-                .ToListAsync();
-
-            var result = _employeeMappingService.MapToEmployeeTransport(employee);
-
-            return result;
-
-        }
-
-       
-
-
-        //public EmployeeTransport Get(long id)
-        //{
-        //    return _applicationDbContext.Employee.Where(x => x.Id == id).FirstOrDefault();
-        //}
-
-        //public IEnumerable<EmployeeTransport> GetAll()
-        //{
-        //    return _applicationDbContext.Employee.ToList();
-        //}
-
-        //public EmployeeTransport GetByName(string name)
-        //{
-        //    return _applicationDbContext.Employee.Where(x => x.FirstName == name).FirstOrDefault();
-        //}
-
-        //public void Update(EmployeeTransport entity)
-        //{
-        //    if (entity.Id != 0 || entity.Id != null)
-        //    {
-
-        //        var modifiedDate = DateTime.Now;
-
-        //        var dbEntity = _applicationDbContext.Employee.Where(x => x.Id == entity.Id).FirstOrDefault();
-
-        //        dbEntity.FirstName = entity.FirstName;
-        //        dbEntity.LastName = entity.LastName;
-        //        dbEntity.MiddleName = entity.MiddleName;
-        //        dbEntity.BirthDate = entity.BirthDate;
-        //        dbEntity.UpdatedOn = modifiedDate;
-        //        dbEntity.UpdatedBy = "User";
-        //        dbEntity.EmployeeStatus = entity.EmployeeStatus;
-
-        //        _applicationDbContext.SaveChanges();
-
-        //    }
-
-
-        //}
-
-
-
     }
 }

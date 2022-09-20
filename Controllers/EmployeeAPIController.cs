@@ -1,5 +1,6 @@
 ﻿using DemoApplication.WebAPI.Models;
 using DemoApplication.WebAPI.Services;
+using DemoApplication.WebAPI.Shared.Responses;
 using DemoApplication.WebAPI.Transports;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace DemoApplication.WebAPI.Controllers
             if (employee == null)            
                 return BadRequest("Employee is null.");
             
-            bool result = await _employeeService.Add(employee);
+            var result = await _employeeService.Add(employee);
 
             return Ok(result);
         }
@@ -33,15 +34,15 @@ namespace DemoApplication.WebAPI.Controllers
                 return BadRequest("Employee is null.");
             
 
-            bool result = await _employeeService.Update(employee);
+            var result = await _employeeService.Update(employee);
 
             return Ok(result);
         }
 
         [HttpGet(template: nameof(GetAllEmployees), Name = nameof(GetAllEmployees))]
-        public async Task<IActionResult> GetAllEmployees()
+        public async Task<IActionResult> GetAllEmployees([FromQuery] PagingRequest request)
         {
-            IEnumerable<EmployeeTransport> employees = await _employeeService.GetAll();
+            var employees = await _employeeService.GetAll(request);
 
             return Ok(employees);
         }
@@ -50,7 +51,7 @@ namespace DemoApplication.WebAPI.Controllers
         [HttpGet(template: "GetEmployeeById/{id}", Name = nameof(GetEmployeeById))]
         public async Task<IActionResult> GetEmployeeById(long id)
         {
-            EmployeeTransport employee = await _employeeService.GetById(id);
+            var employee = await _employeeService.GetById(id);
 
             if (employee == null)            
                 return NotFound("The Employee record couldn't be found.");

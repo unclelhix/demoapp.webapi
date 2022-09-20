@@ -1,4 +1,5 @@
 ﻿using DemoApplication.WebAPI.DatabaseContext;
+using DemoApplication.WebAPI.Shared.Contracts;
 using DemoApplication.WebAPI.Shared.Responses;
 using DemoApplication.WebAPI.Transports;
 using Mapster;
@@ -17,7 +18,7 @@ namespace DemoApplication.WebAPI.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceResponse<IEnumerable<DepartmentGroupTransport>>> GetAll()
+        public async Task<PagingResponse<DepartmentGroupTransport>> GetAll(PagingRequest request)
         {
             throw new NotImplementedException();
         }
@@ -25,10 +26,11 @@ namespace DemoApplication.WebAPI.Services
         public async Task<ServiceResponse<IEnumerable<DepartmentGroupTransport>>> GetByDepartmentId(long departmentId)
         {
             var departmentGroup = await _dbContext.DepartmentGroup
-                .Where(x=>x.DepartmentId == departmentId)
+                .Where(x => x.DepartmentId == departmentId)
                 .ProjectToType<DepartmentGroupTransport>().ToListAsync();
 
-            return new ServiceResponse<IEnumerable<DepartmentGroupTransport>> {
+            return new ServiceResponse<IEnumerable<DepartmentGroupTransport>>
+            {
                 Data = departmentGroup
             };
         }

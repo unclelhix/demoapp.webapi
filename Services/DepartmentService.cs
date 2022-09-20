@@ -31,11 +31,34 @@ namespace DemoApplication.WebAPI.Services
 
         }
 
-        public async Task<ServiceResponse<IEnumerable<DepartmentTransport>>> GetAll()
+        public async Task<PagingResponse<DepartmentTransport>> GetAll(PagingRequest request)
         {
-            var departments = await _dbContext.Department.ProjectToType<DepartmentTransport>().ToListAsync();
+            var query = _dbContext.Department;
 
-            return new ServiceResponse<IEnumerable<DepartmentTransport>>
+            var items = await query.Skip(request.SkipItems).Take(request.ItemsPerPage).ToListAsync();
+
+            var totalItems = await query.CountAsync();
+
+            var mappedItems = _mapper.Map<List<DepartmentTransport>>(items);
+
+            return new PagingResponse<DepartmentTransport>
+            {
+                Data = mappedItems,
+                TotalItems = totalItems,
+                CurrentPage = request.CurrentPage,
+                ItemsPerPage = request.ItemsPerPage
+             
+            };
+        }
+
+        public async Task<ServiceResponse<List<DepartmentTransport>>> GetAllDepartment()
+        {
+            var departments = await _dbContext.Department
+               .ProjectToType<DepartmentTransport>()
+               .ToListAsync();
+
+
+            return new ServiceResponse<List<DepartmentTransport>>
             {
                 Data = departments
             };
@@ -43,13 +66,15 @@ namespace DemoApplication.WebAPI.Services
 
         public async Task<ServiceResponse<DepartmentTransport>> GetById(long id)
         {
-            var department = await _dbContext.Department.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var department = await _dbContext.Department.Where(x => x.Id == id)
+                .ProjectToType<DepartmentTransport>()
+                .FirstOrDefaultAsync();
 
-            var result = _mapper.Map<DepartmentTransport>(department);
+            //var result = _mapper.Map<DepartmentTransport>(department);
 
             return new ServiceResponse<DepartmentTransport>
             {
-                Data = result
+                Data = department
             };
         }
 
